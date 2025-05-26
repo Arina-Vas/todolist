@@ -12,8 +12,6 @@ import { ResultCode } from "@/common/enums"
 import { useMeQuery } from "@/features/auth/api/authApi.ts"
 import { AUTH_TOKEN } from "@/common/constants"
 
-
-
 export const App = () => {
   const [isInitialized, setIsInitialized] = useState(false)
   const themeMode = useAppSelector(selectThemeMode)
@@ -21,11 +19,12 @@ export const App = () => {
   const hasToken = !!localStorage.getItem(AUTH_TOKEN)
   // @ts-ignore
   const { data, isLoading } = useMeQuery(undefined, {
-    skip: !hasToken,
+    skip: !hasToken
   })
   const dispatch = useAppDispatch()
+
   useEffect(() => {
-    if (isLoading ) return
+    if (isLoading) return
     setIsInitialized(true)
     if (data?.resultCode === ResultCode.Success) {
       dispatch(setIsLoggedInAC({ isLoggedIn: true }))

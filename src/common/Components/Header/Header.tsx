@@ -13,7 +13,6 @@ import {
   selectThemeMode,
   setIsLoggedInAC
 } from "@/app/app-slice.ts"
-
 import { MenuButton } from "@/common/Components"
 import { CustomSwitch } from "@/common/Components"
 import { ResultCode } from "@/common/enums"
@@ -22,6 +21,8 @@ import { useLogoutMutation } from "@/features/auth/api/authApi.ts"
 import { baseApi } from "@/app/baseApi.ts"
 import { Path } from "@/common/routing/Routing.tsx"
 import { useNavigate } from "react-router"
+
+
 export const Header = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -38,18 +39,21 @@ export const Header = () => {
     )
   }
 
-  const onLogoutHandler = () => {
+  const onLogoutHandler = async () => {
     logOut().then((res) => {
       if (res.data?.resultCode === ResultCode.Success) {
-        dispatch(setIsLoggedInAC({isLoggedIn: false}))
         localStorage.removeItem(AUTH_TOKEN)
+        dispatch(setIsLoggedInAC({isLoggedIn: false}))
       }
     })
       .then(() => {
-        dispatch(baseApi.util.invalidateTags(["Todolist","Task"]))
+        dispatch(baseApi.util.invalidateTags(["Todolist","Task","Me"]))
       })
 
   }
+
+
+
 
   const onFAQHandler = () => {
          navigate(Path.Faq)

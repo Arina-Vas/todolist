@@ -7,7 +7,7 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     me: build.query<MeResponse,void>({
       query: () => "/auth/me",
-      providesTags: ["Task"]
+      providesTags: ["Task","Me"]
     }),
     login: build.mutation<AuthResponse, LoginArgs>({
       query: (args) => ({
@@ -15,14 +15,16 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: args
       }),
-      invalidatesTags: ["Task"]
+      invalidatesTags: ["Task",'Me']
     }),
     logout: build.mutation<DefaultResponse,void>({
       query: () => ({
         url: "/auth/login",
         method: "DELETE",
-      })
+      }),
+      invalidatesTags: ['Me']
     }),
+
   })
 })
 

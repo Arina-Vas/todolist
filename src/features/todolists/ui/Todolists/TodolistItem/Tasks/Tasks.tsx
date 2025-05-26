@@ -54,13 +54,12 @@ const totalCount = data?.totalCount || 0
   }, [error])
 
   const mappedTask = filterFoo()?.map((task: DomainTask) => {
-    console.log(task.title)
     return <TaskItem key={task.id} task={task} todolist={todolist} />
   })
   if (isLoading) {
     return <TasksSkeleton />
   }
-  return <>{tasks?.length === 0 ? <p>Тасок нет</p> : <List>{mappedTask}</List>}
+  return <>{tasks?.length === 0 ? <p style={{margin: '5px'}}>There are no tasks</p> : <List>{mappedTask}</List>}
     {totalCount > PAGE_SIZE && <TasksPagination totalCount={totalCount} page={page} setPage={setPage} />}
   </>
 }

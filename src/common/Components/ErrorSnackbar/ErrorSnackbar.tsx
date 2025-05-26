@@ -7,7 +7,6 @@ import { changeAppErrorAC, selectError } from "@/app/app-slice.ts"
 export function ErrorSnackbar() {
   const dispatch = useAppDispatch()
   const error = useAppSelector(selectError)
-
   const handleClose = (_event?: SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     if (reason === "clickaway") {
       return

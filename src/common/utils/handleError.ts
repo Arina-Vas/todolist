@@ -12,6 +12,8 @@ export const handleError = (
   api: BaseQueryApi,
   result: QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>
 ) => {
+
+
   let error = 'Some error occurred'
 
   if (result.error) {
